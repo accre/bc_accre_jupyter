@@ -1,7 +1,7 @@
 # Batch Connect - Example Jupyter Notebook Server
 
 ![GitHub Release](https://img.shields.io/github/release/accre/bc_accre_jupyter.svg)
-![GitHub License](https://img.shields.io/github/license/osc/bc_accre_jupyter.svg)
+![GitHub License](https://img.shields.io/github/license/accre/bc_accre_jupyter.svg)
 
 ACCRE Cluster Batch Connect app that launches a Jupyter Notebook server within a
 batch job.
