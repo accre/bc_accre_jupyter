@@ -75,7 +75,23 @@ attributes:
     label: "Conda Virtual Environment"
     help: "Leave blank unless using a conda virtual environment"
     value: ""
- 
+  cgw:
+    label: "Custom Gateway Node"
+    value: "N/A"
+    help: "Leave blank unless using a custom gateway node"
+  use_cgw:
+    widget: check_box
+    checked_value: 1
+    unchecked_value: 0
+    label: "Use a Custom Gateway Node"
+    help: |
+      Check this box if you wish to run your job on a custom gateway
+      node instead of a standard compute node. You must be a member of
+      a group that has an OnDemand enabled custom gateway to use this
+      feature. If you wish to have OnDemand enabled on your group's
+      custom gateway, please open a helpdesk ticket. If this box is
+      checked, then you must enter the name of your custom gateway
+      above. 
 
 # All of the attributes that make up the Dashboard form (in respective order),
 # and made available to the submit configuration file and the template ERB
@@ -99,3 +115,5 @@ form:
   - version
   - venv
   - use_venv
+  - cgw
+  - use_cgw
