@@ -1,30 +1,11 @@
 # Batch Connect app configuration file
 #
-# @note Used to define the submitted cluster, title, description, and
-#   hard-coded/user-defined attributes that make up this Batch Connect app.
 ---
 
-# **MUST** set cluster id here that matches cluster configuration file located
-# under /etc/ood/config/clusters.d/*.yml
-# @example Use the Owens cluster at Ohio Supercomputer Center
-#     cluster: "owens"
 cluster: "accre"
 
-# Define attribute values that aren't meant to be modified by the user within
-# the Dashboard form
 attributes:
-  # Set the corresponding modules that need to be loaded for Jupyter to run
-  #
-  # @note It is called within the batch job as `module load <modules>` if
-  #   defined
-  # @example Do not load any modules
-  #     modules: ""
-  # @example Using default python module
-  #     modules: "python"
-  # @example Using specific python module
-  #     modules: "python/3.5"
-  # @example Using combination of modules
-  #     modules: "python/3.5 cuda/8.0.44"
+  # TODO: Check and remove this line below
   modules: "Anaconda3"
 
   # Any extra command line arguments to feed to the `jupyter notebook ...`
@@ -48,16 +29,20 @@ attributes:
     value: "${HOME}"
   version:
     widget: select
-    label: "Python, R, and Anaconda or GCC version"
-    help: "This defines the version of Python, R and distribution or toolchain that you want to load."
+    label: "Python, R, Octave, and toolchain or distribution version"
+    help: |
+      Select the version of Python and possibly Octave or R that you want to load based
+      on either an ACCRE GCC or Intel compiler toolchain or an installed Anaconda
+      distribution.
     options:
-      # Define functioning R version overloads using a colon after the module load statement
+      - [ "Python/3.6.3 + Octave/4.2.2 (GCC)", "GCC/6.4.0-2.28/Python3"]
+      - [ "Python/2.7.14 + R/3.6.3 + Octave/4.2.2 (GCC)", "GCC/6.4.0-2.28/Python2"]
+      - [ "Python/3.6.3 + Octave/4.2.2 (Intel)", "Intel/2017.4.196/Python3"]
+      - [ "Python/2.7.14 + R/3.6.3 + Octave/4.2.2 (Intel)", "Intel/2017.4.196/Python2"]
       - [ "Python 3.6.3 / Anaconda 5.0.1", "Anaconda3/5.0.1"]
       - [ "Python 3.6.1 / Anaconda 4.4.0", "Anaconda3/4.4.0"]
       - [ "Python 2.7.14 / Anaconda 5.0.1", "Anaconda2/5.0.1"]
       - [ "Python 2.7.13 / Anaconda 4.4.0", "Anaconda2/4.4.0"]
-      - [ "Python 2.7.14 / R 3.4.3 / GCC/6.4.0-2.28", "GCC/6.4.0-2.28/Python2"]
-      - [ "Python 3.6.3 / GCC/6.4.0-2.28", "GCC/6.4.0-2.28/Python3"]
   use_venv:
     widget: check_box
     checked_value: 1
@@ -93,15 +78,6 @@ attributes:
       checked, then you must enter the name of your custom gateway
       above. 
 
-# All of the attributes that make up the Dashboard form (in respective order),
-# and made available to the submit configuration file and the template ERB
-# files
-#
-# @note You typically do not need to modify this unless you want to add a new
-#   configurable value
-# @note If an attribute listed below is hard-coded above in the `attributes`
-#   option, then it will not appear in the form page that the user sees in the
-#   Dashboard
 form:
   - modules
   - extra_jupyter_args
