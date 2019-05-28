@@ -13,6 +13,8 @@ cd "${HOME}"
 <%- unless context.modules.blank? -%>
 # Purge the module environment to avoid conflicts
 module purge
+# Unset the python path
+unset PYTHONPATH
 
 # Load the require modules
 accre_cvmod=<%= context.version %>
