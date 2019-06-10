@@ -52,7 +52,7 @@ attributes:
       Check this box if you wish to load a conda virtual environment. Note that
       you must install jupyter into your virtual environment in order for
       your packages to be available. If installed, the version of python in your
-      conda environment will override the default version selected below.
+      conda environment will override the default version selected above.
       Note that python virtual environments using the venv or virtualenv packages
       are not yet supported but are planned for the near future.
   venv:
