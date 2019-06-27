@@ -10,13 +10,18 @@ cd "${HOME}"
 # Start Jupyter Notebook Server
 #
 
-<%- unless context.modules.blank? -%>
 # Purge the module environment to avoid conflicts
 module purge
 # Unset the python path
 unset PYTHONPATH
 
-# Load the require modules
+<%- if context.use_venv.to_i == 1 -%>
+
+module restore <%= context.custom_mods %>
+
+<%- else -%>
+
+# Load the pre-selected  modules
 accre_cvmod=<%= context.version %>
 if [[ "$accre_cvmod" == "GCC/6.4.0-2.28/Python2" ]]
 then
@@ -75,18 +80,25 @@ then
 else
     module load $accre_cvmod
 fi
+<%- end -%>
 
 # List loaded modules
 module list
-<%- end -%>
 
 # Benchmark info
 echo "TIMING - Starting jupyter at: $(date)"
 
 # Launch the Jupyter Notebook Server
 set -x
-<%- if context.use_venv.to_i == 1 -%>
-source activate <%= context.venv %>
+
+<%- if not context.venv.strip.empty? -%>
+if python --version 2>&1 | grep Anaconda ; then
+  source activate <%= context.venv %>
+else
+  source <%= context.venv %>/bin/activate
+fi
+
 <%- end -%>
+
 unset XDG_RUNTIME_DIR
 jupyter notebook --config="${CONFIG_FILE}" --ip="0.0.0.0" --notebook-dir=<%= context.notebook_dir %> <%= context.extra_jupyter_args %>

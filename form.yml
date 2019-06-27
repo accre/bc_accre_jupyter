@@ -22,6 +22,16 @@ attributes:
   bc_num_cores:
     label: "Number of CPU Cores"
     value: 1
+  cpuarch:
+    widget: select
+    label: "CPU Architecture"
+    help: "Defaults to the first available node with any architecture"
+    options:
+      - [ "Any", "any" ]
+      - [ "Skylake", "skylake" ]
+      - [ "Haswell", "haswell" ]
+      - [ "Sandy Bridge", "sandybridge" ]
+      - [ "Westmere", "westmere" ]
   notebook_dir:
     label: "Working Directory" 
     help: "Directory containing your notebook files. Defaults to your home directory, you must include the absolute path to the directory."
@@ -29,7 +39,7 @@ attributes:
     value: "${HOME}"
   version:
     widget: select
-    label: "Python, R, Octave, and toolchain or distribution version"
+    label: "Python, R, and/or Octave version for a pre-selected environment"
     help: |
       Select the version of Python and possibly Octave or R that you want to load based
       on either an ACCRE GCC or Intel compiler toolchain or an installed Anaconda
@@ -47,18 +57,28 @@ attributes:
     widget: check_box
     checked_value: 1
     unchecked_value: 0
-    label: "Use a Conda Virtual Environment"
+    label: "Use a Customized Environment"
     help: |
-      Check this box if you wish to load a conda virtual environment. Note that
-      you must install jupyter into your virtual environment in order for
-      your packages to be available. If installed, the version of python in your
-      conda environment will override the default version selected above.
-      Note that python virtual environments using the venv or virtualenv packages
-      are not yet supported but are planned for the near future.
+      Check this box if you wish to load a customized environment.
+      Note that you must have jupyter available based on the Lmod modules
+      and/or virtual environment that you choose to load.
+  custom_mods:
+    widget: "text_field"
+    label: "Lmod Module Collection"
+    help: |
+      Leave blank unless using a customized environment. If using a customized
+      environment, you must save the modules you want to use in a
+      [module collection]: https://www.vanderbilt.edu/accre/documentation/lmod-guide/#modules-collections
+      and specify the module collection name here.
+    value: ""
   venv:
     widget: "text_field"
-    label: "Conda Virtual Environment"
-    help: "Leave blank unless using a conda virtual environment"
+    label: "Python or Conda Virtual Environment"
+    help: |
+      Leave blank unless using a python or conda virtual environment. For
+      a python virtual environment, you must specify the absolute path.
+      Your virtual environment should have been created with the same
+      set of modules as the module collection specified above.
     value: ""
   use_cgw:
     widget: check_box
@@ -87,9 +107,11 @@ form:
   - bc_mem
   - bc_num_cores
   - bc_num_slots
+  - cpuarch
   - notebook_dir
   - version
   - use_venv
+  - custom_mods
   - venv
   - use_cgw
   - cgw
