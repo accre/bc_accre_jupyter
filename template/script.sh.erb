@@ -80,7 +80,7 @@ echo "TIMING - Starting jupyter at: $(date)"
 # Launch the Jupyter Notebook Server
 set -x
 
-<%- if not context.venv.strip.empty? -%>
+<%- if context.use_venv.to_i == 1 -%>
 if python --version 2>&1 | grep Anaconda ; then
   source activate <%= context.venv %>
 else
