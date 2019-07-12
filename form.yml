@@ -39,9 +39,9 @@ attributes:
     value: "${HOME}"
   version:
     widget: select
-    label: "Python, R, and/or Octave version for a pre-selected environment"
+    label: "Python version"
     help: |
-      Select the version of Python and possibly Octave or R that you want to load based
+      Select the version of Python that you want to load based
       on either an ACCRE GCC or Intel compiler toolchain or an installed Anaconda
       distribution.
     options:
@@ -57,28 +57,19 @@ attributes:
     widget: check_box
     checked_value: 1
     unchecked_value: 0
-    label: "Use a Customized Environment"
+    label: "Virtual Environment"
     help: |
-      Check this box if you wish to load a customized environment.
-      Note that you must have jupyter available based on the Lmod modules
-      and/or virtual environment that you choose to load.
-  custom_mods:
-    widget: "text_field"
-    label: "Lmod Module Collection"
-    help: |
-      Leave blank unless using a customized environment. If using a customized
-      environment, you must save the modules you want to use in a
-      [module collection]: https://www.vanderbilt.edu/accre/documentation/lmod-guide/#modules-collections
-      and specify the module collection name here.
-    value: ""
+      Check this box if you wish to load a python or conda virtual environment.
   venv:
     widget: "text_field"
     label: "Python or Conda Virtual Environment"
     help: |
       Leave blank unless using a python or conda virtual environment. For
       a python virtual environment, you must specify the absolute path.
-      Your virtual environment should have been created with the same
-      set of modules as the module collection specified above.
+      For a python virtual environment, any packages built in the environment
+      will take precedence over those from the Lmod modules. Any virtual
+      environment used should have been built from the same Python or Anaconda
+      Lmod module selected above.
     value: ""
   use_cgw:
     widget: check_box
@@ -111,7 +102,6 @@ form:
   - notebook_dir
   - version
   - use_venv
-  - custom_mods
   - venv
   - use_cgw
   - cgw
