@@ -4,7 +4,8 @@ category: Interactive Apps
 subcategory: Servers
 role: batch_connect
 description: |
-  This app will launch a Jupyter Notebook server on a production GPU node.
+  This app will launch a Jupyter Notebook server on a production 
+  compute node.
 
   The Jupyter Notebook can be loaded either
   from an ACCRE GCC or Intel compiler toolchain or an installed Anaconda
