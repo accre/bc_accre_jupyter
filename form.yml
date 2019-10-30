@@ -71,7 +71,7 @@ attributes:
       environment used should have been built from the same Python or Anaconda
       Lmod module selected above.
     value: ""
-  use_venv:
+  use_mc:
     widget: check_box
     checked_value: 1
     unchecked_value: 0
@@ -79,7 +79,7 @@ attributes:
     help: |
       Check this box if you wish to load a module collection instead of using
       Lmod modules specified by the python version menu above.
-  venv:
+  mc:
     widget: "text_field"
     label: "Custom Module Collection"
     help: |
