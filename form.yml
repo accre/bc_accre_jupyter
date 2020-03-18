@@ -11,7 +11,9 @@ attributes:
   # Any extra command line arguments to feed to the `jupyter notebook ...`
   # command that launches the Jupyter notebook within the batch job
   extra_jupyter_args: ""
-  bc_account: null
+  bc_account:
+    label: "ACCRE Slurm Group"
+    help: "Leave blank to use your default slurm group"
   bc_queue: null
   bc_num_slots: null
   bc_num_hours:
@@ -112,7 +114,6 @@ attributes:
 form:
   - modules
   - extra_jupyter_args
-  - bc_account
   - bc_queue
   - bc_num_hours
   - bc_mem
@@ -121,6 +122,7 @@ form:
   - cpuarch
   - notebook_dir
   - version
+  - bc_account
   - use_venv
   - venv
   - use_mc
